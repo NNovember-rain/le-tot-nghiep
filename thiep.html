@@ -87,17 +87,23 @@
 
         /* --- Parallax Effect cho Hero Section --- */
         .parallax {
-            background-image: url('https://res-console.cloudinary.com/djp7nhpbv/thumbnails/v1/image/upload/v1779018412/ejc4MzU2ODIzMDU3MjZfZTZlNTdlYzlmMmEwOWFlZGUxZWYyZGIxOTJhZmY2MTZfa3N4c2Jt/drilldown');
+            background-image: url('https://res.cloudinary.com/djp7nhpbv/image/upload/v1779018412/z7835682305726_e6e57ec9f2a09aede1ef2db192aff616_ksxsbm.jpg');
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
             position: relative;
         }
-        /* iOS Safari không hỗ trợ background-attachment: fixed */
+        /* iOS Safari & Thiết bị di động không hỗ trợ tốt background-attachment: fixed */
+        @media (max-width: 768px) {
+            .parallax, .parallax-memory {
+                background-attachment: scroll !important;
+                background-position: center center !important;
+            }
+        }
         @supports (-webkit-touch-callout: none) {
             .parallax, .parallax-memory {
-                background-attachment: scroll;
+                background-attachment: scroll !important;
                 background-size: cover;
             }
         }
