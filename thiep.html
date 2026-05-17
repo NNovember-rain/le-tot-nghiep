@@ -947,9 +947,9 @@
         <img id="lightbox-img" src="" alt="Enlarged Memory" class="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain hidden">
 
         <!-- Chế độ 2: Hộp thư Đôi (Cho Khách Mời / Tâm Thư) -->
-        <div id="lightbox-container" class="relative bg-[#fdfbf7] rounded-3xl w-full max-w-4xl max-h-[85vh] flex flex-col md:flex-row shadow-[0_0_50px_rgba(0,0,0,0.6)] transform scale-95 transition-all duration-500 overflow-y-auto md:overflow-hidden border border-gold/30 p-2 md:p-4 hidden" onclick="event.stopPropagation()">
+        <div id="lightbox-container" class="relative bg-[#fdfbf7] rounded-3xl w-full max-w-4xl max-h-[85vh] shadow-[0_0_50px_rgba(0,0,0,0.6)] transform scale-95 transition-all duration-500 overflow-hidden border border-gold/30 hidden" onclick="event.stopPropagation()">
             
-            <!-- Oxford Double Border Frame -->
+            <!-- Oxford Double Border Frame (Viền cố định tuyệt đối không bị lệch) -->
             <div class="absolute inset-2 border border-gold/20 rounded-[1.3rem] pointer-events-none z-0"></div>
             <div class="absolute inset-3 border-2 border-double border-gold/40 rounded-[1.1rem] pointer-events-none z-0"></div>
 
@@ -958,36 +958,41 @@
                 <i class="fas fa-times text-base md:text-lg"></i>
             </button>
 
-            <!-- Cột bên trái: Ảnh phong cách Polaroid -->
-            <div class="w-full md:w-1/2 flex-shrink-0 relative z-10 flex items-center justify-center p-4">
-                <div class="bg-white p-3 pb-6 rounded-xl shadow-lg border border-gold/20 transform -rotate-1 hover:rotate-0 transition-transform duration-500 w-full max-w-xs md:max-w-none md:h-full md:max-h-[65vh] flex flex-col">
-                    <div class="w-full overflow-hidden rounded-lg">
-                        <img id="lightbox-guest-img" src="" alt="Ảnh kỉ niệm" class="w-full h-auto aspect-[3/4] md:h-[48vh] md:aspect-auto object-cover rounded-lg">
-                    </div>
-                    <div class="h-6 md:h-8 flex items-center justify-center mt-3">
-                        <span id="lightbox-polaroid-name" class="font-serif font-bold text-navy text-xs md:text-sm tracking-wider"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cột bên phải: Tâm thư -->
-            <div class="w-full md:w-1/2 relative z-10 flex flex-col p-4 md:p-6 justify-between">
-                <!-- Tiêu đề bức thư -->
-                <div class="text-center mb-4 mt-2 md:mt-4">
-                    <span class="block text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-1">Thư Gửi Anh Em</span>
-                    <h3 id="lightbox-friend-name" class="text-xl md:text-2xl font-serif font-bold text-navy">Gửi Đăng</h3>
-                    <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-2"></div>
-                </div>
-
-                <!-- Nội dung thư cuộn mượt mà -->
-                <div class="flex-grow md:overflow-y-auto px-2 md:px-4 text-navy font-serif leading-relaxed text-sm md:text-base pr-2 custom-scrollbar text-justify space-y-4" id="lightbox-letter-content" style="max-height: none; md:max-height: calc(100% - 100px);">
-                    <!-- Sẽ chèn nội dung thư động bằng JS -->
-                </div>
+            <!-- Wrapper cuộn nội dung bên trong (Để giữ khung viền vàng cố định bên ngoài) -->
+            <div class="w-full max-h-[85vh] overflow-y-auto md:overflow-hidden flex flex-col md:flex-row p-2 md:p-4 relative z-10 custom-scrollbar">
                 
-                <!-- Ký tên trang nhã cuối thư -->
-                <div class="text-right mt-6 md:mt-4 pt-2 border-t border-gold/10 font-serif italic text-gold text-xs md:text-sm">
-                    Thương mến, Luân & Hiệp
+                <!-- Cột bên trái: Ảnh phong cách Polaroid -->
+                <div class="w-full md:w-1/2 flex-shrink-0 relative z-10 flex items-center justify-center p-4">
+                    <div class="bg-white p-3 pb-6 rounded-xl shadow-lg border border-gold/20 transform -rotate-1 hover:rotate-0 transition-transform duration-500 w-full max-w-xs md:max-w-none md:h-full md:max-h-[65vh] flex flex-col">
+                        <div class="w-full overflow-hidden rounded-lg">
+                            <img id="lightbox-guest-img" src="" alt="Ảnh kỉ niệm" class="w-full h-auto aspect-[3/4] md:h-[48vh] md:aspect-auto object-cover rounded-lg">
+                        </div>
+                        <div class="h-6 md:h-8 flex items-center justify-center mt-3">
+                            <span id="lightbox-polaroid-name" class="font-serif font-bold text-navy text-xs md:text-sm tracking-wider"></span>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Cột bên phải: Tâm thư -->
+                <div class="w-full md:w-1/2 relative z-10 flex flex-col p-4 md:p-6 justify-between">
+                    <!-- Tiêu đề bức thư -->
+                    <div class="text-center mb-4 mt-2 md:mt-4">
+                        <span class="block text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-1">Thư Gửi Anh Em</span>
+                        <h3 id="lightbox-friend-name" class="text-xl md:text-2xl font-serif font-bold text-navy">Gửi Đăng</h3>
+                        <div class="w-16 h-[1px] bg-gold/50 mx-auto mt-2"></div>
+                    </div>
+
+                    <!-- Nội dung thư cuộn mượt mà -->
+                    <div class="flex-grow md:overflow-y-auto px-2 md:px-4 text-navy font-serif leading-relaxed text-sm md:text-base pr-2 custom-scrollbar text-justify space-y-4" id="lightbox-letter-content" style="max-height: none; md:max-height: calc(100% - 100px);">
+                        <!-- Sẽ chèn nội dung thư động bằng JS -->
+                    </div>
+                    
+                    <!-- Ký tên trang nhã cuối thư -->
+                    <div class="text-right mt-6 md:mt-4 pt-2 border-t border-gold/10 font-serif italic text-gold text-xs md:text-sm">
+                        Thương mến, Luân & Hiệp
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
